@@ -4,7 +4,7 @@
     local Window = Library:CreateWindow({
         Name = 'Yero.cc | ❗South Bronx❗',
         Themeable = {
-            Info = 'By tj & Xferq💫',
+            Info = 'By YoxanX💫',
             Credit = True, -- Shows library credits
         },
         Background = "rbxassetid://18239728064",
