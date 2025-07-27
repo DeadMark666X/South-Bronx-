@@ -19,7 +19,7 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Username = LocalPlayer.Name  
 
 -- // Show Notification on Script Load
-Library:Notify("Welcome Thank you for using [Bypassin] - " .. Username .. " 👏", 5)
+Library:Notify("Welcome Thank you for using [PenguinHub] - " .. Username .. " 👏", 5)
 task.wait(1) 
 Library:Notify("Status: 🟢 Undetected (Safe from bans)", 5)
 
