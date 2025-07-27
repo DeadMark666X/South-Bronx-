@@ -2,7 +2,7 @@
 
     -- Create main window
     local Window = Library:CreateWindow({
-        Name = 'Yero.cc | ❗South Bronx❗',
+        Name = 'YoxanHub | ❗South Bronx❗',
         Themeable = {
             Info = 'By YoxanX💫',
             Credit = True, -- Shows library credits
