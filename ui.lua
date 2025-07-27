@@ -1,6 +1,4 @@
--- if you bought this ur retarded leaked by hexv1. / Paradox Leaks / Dodgebros 
-
-
+ 
 
 
 
@@ -9,9 +7,9 @@
 local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)("Pepsi's UI Library")
 
 local Window = Library:CreateWindow({
-    Name = 'DodgeBros | South Bronx',
+    Name = 'PenguinHub | South Bronx',
     Themeable = {
-        Info = 'Thanks For Purchasing!',
+        Info = 'Thanks Try The Script!',
         Credit = false,
     },
 DefaultTheme = '{"__Designer.Colors.topGradient":"232323","__Designer.Settings.ShowHideKey":"Enum.KeyCode.RShift","__Designer.Colors.section":"B0AFB0","__Designer.Colors.hoveredOptionBottom":"2D2D2D","__Designer.Background.ImageAssetID":"rbxassetid://0","__Designer.Colors.innerBorder":"493F49","__Designer.Colors.unselectedOption":"282828","__Designer.Files.WorkspaceFile":"DodgeBros","__Designer.Colors.unhoveredOptionTop":"323232","__Designer.Colors.outerBorder":"0F0F0F","__Designer.Background.ImageColor":"FFFFFF","__Designer.Colors.tabText":"B9B9B9","__Designer.Colors.elementBorder":"141414","__Designer.Colors.sectionBackground":"232222","__Designer.Colors.selectedOption":"373737","__Designer.Colors.background":"282828","__Designer.Colors.bottomGradient":"1D1D1D","__Designer.Background.ImageTransparency":100,"__Designer.Colors.main":"FFFFFF","__Designer.Colors.elementText":"939193","__Designer.Colors.hoveredOptionTop":"414141","__Designer.Colors.otherElementText":"817F81","__Designer.Colors.unhoveredOptionBottom":"232323","__Designer.Background.UseBackgroundImage":false}'
@@ -1348,7 +1346,7 @@ local function handleNewPlayer(player)
     player.CharacterAdded:Connect(function(character)
         createESP(player, character)
     end)
-end
+endr
 
 local function cleanupESP()
     for player, espData in pairs(activeESP) do
