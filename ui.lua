@@ -1,9 +1,9 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
  
 local Window = Rayfield:CreateWindow({
-   Name = "🔥 Void Hub BETA! | South bronx 🔫 | Best paid sb script",
-   LoadingTitle = "🔫 Paid South Bronx 💥",
-   LoadingSubtitle = "By void",
+   Name = "🔥 YoxanX HUB BETA! | South bronx 🔫 | Best paid sb script",
+   LoadingTitle = "🔫 YoxanX South Bronx 💥",
+   LoadingSubtitle = "By YoxanX",
  
 Theme = "Green", -- Check https://docs.sirius.menu/rayfield/configuration/themes
  
