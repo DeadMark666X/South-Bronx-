@@ -240,7 +240,7 @@ FovCircle = Drawing.new("Circle")
 FovCircle.Radius = 150
 FovCircle.NumSides = 128
 FovCircle.Thickness = 1.5
-FovCircle.Visible = false
+FovCircle.Visible = true 
 FovCircle.Color = Color3.fromRGB(255,255,255)
 
 game:GetService("RunService").RenderStepped:Connect(function()
