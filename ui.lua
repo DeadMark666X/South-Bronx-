@@ -19,13 +19,13 @@ Theme = "Green", -- Check https://docs.sirius.menu/rayfield/configuration/themes
    },
    KeySystem = true, 
    KeySettings = {
-      Title = "Key | Void hub",
+      Title = "Key | YoxanX HUB",
       Subtitle = "Key System",
       Note = "Key In Discord Server",
       FileName = "bronxK", 
       SaveKey = true, 
       GrabKeyFromSite = true, 
-      Key = {"BadBadman"} 
+      Key = {"YOXAN124a"} 
    }
 })
  
