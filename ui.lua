@@ -222,18 +222,157 @@ local Slider = AimbotTab:CreateSlider({
         end
  
         -- Clear all previous objects and links
-        local Players = game:GetService("Players")
-        local UserInputService = game:GetService("UserInputService")
-        local RunService = game:GetService("RunService")
-        local LocalPlayer = Players.LocalPlayer
-        local Camera = game.Workspace.CurrentCamera
-        local AimPartName = "Head"
-        local HumanoidRootPartName = "HumanoidRootPart"
- 
-        local AimSmoothing = 0.2
-        local AimDistance = 300
-        local FOVRadius = Value -- Value from Slider
-        local Aiming = false
+        local library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
+local Wait = library.subs.Wait -- Only returns if the GUI has not been terminated. For 'while Wait() do' loops
+
+Gc = getgc()
+Players = game.Players
+Player = Players.LocalPlayer
+Camera = game.Workspace.Camera
+RunService = game:GetService("RunService")
+UserInputService = game:GetService("UserInputService")
+
+SilentAim = false
+SilentAimPart = "Head"
+SilentAimWallbang = false
+
+FovCircle = Drawing.new("Circle")
+FovCircle.Radius = 150
+FovCircle.NumSides = 128
+FovCircle.Thickness = 1.5
+FovCircle.Visible = false
+FovCircle.Color = Color3.fromRGB(255,255,255)
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    FovCircle.Position = UserInputService:GetMouseLocation()
+end)
+
+local function GetEquippedWeapon()
+    local Char = Player.Character
+    if Char then
+        local Tool = Char:FindFirstChildWhichIsA("Tool")
+        if (Tool) and Tool:FindFirstChild("Setting") then
+            return Tool
+        end
+    end
+end
+
+local function SearchGc(FunctionName)
+    for i,v in pairs(Gc) do
+        if type(v) == "function" then
+            local info = debug.getinfo(v)
+            if info.name == FunctionName then
+                return v
+            end
+        end
+    end
+end
+
+function GetFovTarget(Circle,HitPart)
+    local Target
+    local LowestDistance = math.huge
+
+    for i,v in pairs(Players:GetPlayers()) do
+        local Char = v.Character
+        if v ~= Player and Char then
+            local Hmrp = Char:FindFirstChild("HumanoidRootPart")
+            local Humanoid = Char:FindFirstChild("Humanoid")
+            if Hmrp and Humanoid and Char:FindFirstChild(HitPart) then
+                if Humanoid.Health > 0 then
+                    local ScreenPos,OnScreen = Camera:WorldToViewportPoint(Hmrp.Position)
+                    local Distance = (Circle.Position - Vector2.new(ScreenPos.X,ScreenPos.Y)).Magnitude
+                    if Distance < Circle.Radius and Distance < LowestDistance and OnScreen then
+                        Target = v
+                        LowestDistance = Distance
+                    end
+                end
+            end
+        end
+    end
+    return Target
+end
+
+CastBlacklist = SearchGc("CastBlacklist")
+CastWhitelist = SearchGc("CastWhitelist")
+
+if not CastBlacklist or not CastWhitelist then
+    Player:Kick("Missing Function, Error code: #1")
+    return
+end
+
+OldCastBlacklist = hookfunction(CastBlacklist,function(...)
+    local Target = GetFovTarget(FovCircle,SilentAimPart)
+    if Target and SilentAim then
+        local args = {...}
+        args[2] = Target.Character[SilentAimPart].Position - args[1]
+        if SilentAimWallbang then
+            args[3] = {Target.Character}
+            return CastWhitelist(unpack(args))
+        end
+        return OldCastBlacklist(unpack(args))
+    end
+    return OldCastBlacklist(...)
+end)
+
+local PepsisWorld = library:CreateWindow({
+Name = "Pepsi's World",
+Themeable = {
+Info = "Discord Server: VzYTJ7Y"
+}
+})
+
+local GeneralTab = PepsisWorld:CreateTab({
+Name = "General"
+})
+local CombatSection = GeneralTab:CreateSection({
+Name = "Combat"
+})
+
+CombatSection:AddToggle({
+Name = "Silent Aim",
+    Callback = function(value)
+        SilentAim = value
+    end,
+})
+
+CombatSection:AddToggle({
+Name = "WallBang",
+    Callback = function(value)
+        SilentAimWallbang = value
+    end,
+})
+
+CombatSection:AddToggle({
+Name = "Show FOV",
+    Callback = function(value)
+        FovCircle.Visible = value
+    end,
+})
+
+CombatSection:AddSlider({
+Name = "Fov Size",
+    Default = 150,
+    Min = 10,
+    Max = 500,
+    Rounding = 0,
+    Compact = false,
+    Callback = function(value)
+        FovCircle.Radius = value
+end
+})
+
+CombatSection:AddSlider({
+Name = "Fov Thickness",
+    Default = 1.5,
+    Min = 1.5,
+    Max = 5,
+    Rounding = 1,
+    Compact = false,
+    Callback = function(value)
+        FovCircle.Thickness = value
+end
+})
+
  
         -- New FOV circle
         fovCircle = Drawing.new("Circle")
