@@ -10,11 +10,11 @@ Theme = "Green", -- Check https://docs.sirius.menu/rayfield/configuration/themes
    ConfigurationSaving = {
       Enabled = false,
       FolderName = nil,
-      FileName = "Void hub"
+      FileName = "Yoxan hub"
    },
    Discord = {
       Enabled = true,
-      Invite = "Voidhub", 
+      Invite = "Yoxanhub", 
       RememberJoins = true 
    },
    KeySystem = true, 
@@ -35,7 +35,7 @@ local MainTab = Window:CreateTab("Home", nil)
  local MainButton = MainTab:CreateButton({
     Name = "Discord",
     Callback = function()
-      setclipboard("https://discord.gg/Krsk3fBy")
+      setclipboard("https://discord.gg/f222ms4U")
       print("Invite link copied to clipboard!")
       Rayfield:Notify({
         Title = "Invite Link Copied!",
