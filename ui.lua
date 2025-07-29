@@ -1,5 +1,4 @@
 
-
 local repo
 if game:GetService("UserInputService").TouchEnabled or game:GetService("UserInputService").GamepadEnabled then
     repo = 'https://raw.githubusercontent.com/LionTheGreatRealFrFr/MobileLinoriaLib/main/'
@@ -19,13 +18,13 @@ local LocalPlayer = game:GetService("Players").LocalPlayer
 local Username = LocalPlayer.Name  
 
 -- // Show Notification on Script Load
-Library:Notify("Welcome Thank you for using [Bypassin] - " .. Username .. " 👏", 5)
+Library:Notify("Welcome Thank you for using [YoxanHub] - " .. Username .. " 👏", 5)
 task.wait(1) 
 Library:Notify("Status: 🟢 Undetected (Safe from bans)", 5)
 
 -- // Create Main UI Window
 local Window = Library:CreateWindow({
-    Title = 'Bypassin | [Beta v1.0] | Premium Version',
+    Title = 'YoxanHub | [Beta v1.0] | Premium Version',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
