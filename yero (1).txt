@@ -1,0 +1,1580 @@
+    local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)("Pepsi's UI Library")
+
+    -- Create main window
+    local Window = Library:CreateWindow({
+        Name = 'Yero.cc | ❗South Bronx❗',
+        Themeable = {
+            Info = 'By tj & Xferq💫',
+            Credit = True, -- Shows library credits
+        },
+        Background = "rbxassetid://18239728064",
+        Theme = [[{
+            "__Designer.Colors.topGradient":"1C1C1C",
+            "__Designer.Colors.section":"8400FF",
+            "__Designer.Colors.hoveredOptionBottom":"8400FF",
+            "__Designer.Background.ImageAssetID":"rbxassetid://285099811",
+            "__Designer.Colors.selectedOption":"8400FF",
+            "__Designer.Colors.unselectedOption":"4D4D4D",
+            "__Designer.Files.WorkspaceFile":"South bronx Corn.wtf", 
+            "__Designer.Colors.unhoveredOptionTop":"1C1C1C",
+            "__Designer.Colors.outerBorder":"000000",
+            "__Designer.Background.ImageColor":"FF008C",
+            "__Designer.Colors.tabText":"FFFFFF",
+            "__Designer.Colors.elementBorder":"000000",
+            "__Designer.Background.ImageTransparency":85, 
+            "__Designer.Colors.background":"1A1A1A",
+            "__Designer.Colors.innerBorder":"1C1C1C",
+            "__Designer.Colors.bottomGradient":"1C1C1C",
+            "__Designer.Colors.sectionBackground":"1C1C1C",
+            "__Designer.Colors.hoveredOptionTop":"8400FF",
+            "__Designer.Colors.otherElementText":"FF008C",
+            "__Designer.Colors.main":"8400FF",
+            "__Designer.Colors.elementText":"FFFFFF",
+            "__Designer.Colors.unhoveredOptionBottom":"1C1C1C",
+            "__Designer.Background.UseBackgroundImage":false
+        }]]
+    })
+    -- Create tab and section
+    local GeneralTab = Window:CreateTab({Name = 'Main'})
+
+    local MainSection = GeneralTab:CreateSection({
+        Name = 'Player',
+        Side = 'Left'
+    })
+
+    MainSection:AddToggle({
+        Name = 'Faster Walkspeed',
+        Callback = function()
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 21
+        end
+    })
+
+    local function dashForward(distance)
+    local character = game.Players.LocalPlayer.Character
+    if character then
+        local hrp = character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            hrp.CFrame = hrp.CFrame + hrp.CFrame.LookVector * distance
+        end
+    end
+end
+
+MainSection:AddToggle({
+    Name = "Dash",
+    Keybind = {
+        Mode = "Hold"
+    },
+    Callback = function(state)
+        if state then
+            dashForward(5)  
+        end
+    end,
+})
+
+MainSection:AddToggle({
+        Name = 'Realistic Shader',
+        Callback = function()
+            
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
+local Bloom = Instance.new("BloomEffect")
+Bloom.Intensity = 0.1
+Bloom.Threshold = 0
+Bloom.Size = 100
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Enabled = false
+Bloom.Intensity = 0.35
+Bloom.Threshold = 0.2
+Bloom.Size = 56
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 2
+
+Blur.Parent = game:GetService("Lighting")
+local Efecto = Instance.new("BlurEffect")
+Efecto.Name = "Efecto"
+Efecto.Enabled = false
+Efecto.Size = 2
+
+Efecto.Parent = game:GetService("Lighting")
+local Inaritaisha = Instance.new("ColorCorrectionEffect")
+Inaritaisha.Name = "Inari taisha"
+Inaritaisha.Saturation = 0.05
+Inaritaisha.TintColor = Color3.fromRGB(255, 224, 219)
+
+Inaritaisha.Parent = game:GetService("Lighting")
+local Normal = Instance.new("ColorCorrectionEffect")
+Normal.Name = "Normal"
+Normal.Enabled = false
+Normal.Saturation = -0.2
+Normal.TintColor = Color3.fromRGB(255, 232, 215)
+
+Normal.Parent = game:GetService("Lighting")
+local SunRays = Instance.new("SunRaysEffect")
+SunRays.Intensity = 0.05
+
+SunRays.Parent = game:GetService("Lighting")
+local Sunset = Instance.new("Sky")
+Sunset.Name = "Sunset"
+Sunset.SkyboxUp = "rbxassetid://323493360"
+Sunset.SkyboxLf = "rbxassetid://323494252"
+Sunset.SkyboxBk = "rbxassetid://323494035"
+Sunset.SkyboxFt = "rbxassetid://323494130"
+Sunset.SkyboxDn = "rbxassetid://323494368"
+Sunset.SunAngularSize = 14
+Sunset.SkyboxRt = "rbxassetid://323494067"
+
+Sunset.Parent = game:GetService("Lighting")
+local Takayama = Instance.new("ColorCorrectionEffect")
+Takayama.Name = "Takayama"
+Takayama.Enabled = false
+Takayama.Saturation = -0.3
+Takayama.Contrast = 0.1
+Takayama.TintColor = Color3.fromRGB(235, 214, 204)
+
+Takayama.Parent = game:GetService("Lighting")
+local L = game:GetService("Lighting")
+L.Brightness = 2.14
+L.ColorShift_Bottom = Color3.fromRGB(11, 0, 20)
+L.ColorShift_Top = Color3.fromRGB(240, 127, 14)
+L.OutdoorAmbient = Color3.fromRGB(34, 0, 49)
+L.ClockTime = 6.7
+L.FogColor = Color3.fromRGB(94, 76, 106)
+L.FogEnd = 1000
+L.FogStart = 0
+L.ExposureCompensation = 0.24
+L.ShadowSoftness = 0
+L.Ambient = Color3.fromRGB(59, 33, 27)
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Intensity = 0.1
+Bloom.Threshold = 0
+Bloom.Size = 100
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+
+local Bloom = Instance.new("BloomEffect")
+Bloom.Enabled = false
+Bloom.Intensity = 0.35
+Bloom.Threshold = 0.2
+Bloom.Size = 56
+
+local Tropic = Instance.new("Sky")
+Tropic.Name = "Tropic"
+Tropic.SkyboxUp = "http://www.roblox.com/asset/?id=169210149"
+Tropic.SkyboxLf = "http://www.roblox.com/asset/?id=169210133"
+Tropic.SkyboxBk = "http://www.roblox.com/asset/?id=169210090"
+Tropic.SkyboxFt = "http://www.roblox.com/asset/?id=169210121"
+Tropic.StarCount = 100
+Tropic.SkyboxDn = "http://www.roblox.com/asset/?id=169210108"
+Tropic.SkyboxRt = "http://www.roblox.com/asset/?id=169210143"
+Tropic.Parent = Bloom
+
+local Sky = Instance.new("Sky")
+Sky.SkyboxUp = "http://www.roblox.com/asset/?id=196263782"
+Sky.SkyboxLf = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxBk = "http://www.roblox.com/asset/?id=196263721"
+Sky.SkyboxFt = "http://www.roblox.com/asset/?id=196263721"
+Sky.CelestialBodiesShown = false
+Sky.SkyboxDn = "http://www.roblox.com/asset/?id=196263643"
+Sky.SkyboxRt = "http://www.roblox.com/asset/?id=196263721"
+Sky.Parent = Bloom
+
+Bloom.Parent = game:GetService("Lighting")
+local Blur = Instance.new("BlurEffect")
+Blur.Size = 2
+
+Blur.Parent = game:GetService("Lighting")
+local Efecto = Instance.new("BlurEffect")
+Efecto.Name = "Efecto"
+Efecto.Enabled = false
+Efecto.Size = 2
+
+Efecto.Parent = game:GetService("Lighting")
+local Inaritaisha = Instance.new("ColorCorrectionEffect")
+Inaritaisha.Name = "Inari taisha"
+Inaritaisha.Saturation = 0.05
+Inaritaisha.TintColor = Color3.fromRGB(255, 224, 219)
+
+Inaritaisha.Parent = game:GetService("Lighting")
+local Normal = Instance.new("ColorCorrectionEffect")
+Normal.Name = "Normal"
+Normal.Enabled = false
+Normal.Saturation = -0.2
+Normal.TintColor = Color3.fromRGB(255, 232, 215)
+
+Normal.Parent = game:GetService("Lighting")
+local SunRays = Instance.new("SunRaysEffect")
+SunRays.Intensity = 0.05
+
+SunRays.Parent = game:GetService("Lighting")
+local Sunset = Instance.new("Sky")
+Sunset.Name = "Sunset"
+Sunset.SkyboxUp = "rbxassetid://323493360"
+Sunset.SkyboxLf = "rbxassetid://323494252"
+Sunset.SkyboxBk = "rbxassetid://323494035"
+Sunset.SkyboxFt = "rbxassetid://323494130"
+Sunset.SkyboxDn = "rbxassetid://323494368"
+Sunset.SunAngularSize = 14
+Sunset.SkyboxRt = "rbxassetid://323494067"
+
+Sunset.Parent = game:GetService("Lighting")
+local Takayama = Instance.new("ColorCorrectionEffect")
+Takayama.Name = "Takayama"
+Takayama.Enabled = false
+Takayama.Saturation = -0.3
+Takayama.Contrast = 0.1
+Takayama.TintColor = Color3.fromRGB(235, 214, 204)
+
+Takayama.Parent = game:GetService("Lighting")
+local L = game:GetService("Lighting")
+L.Brightness = 2.14
+L.ColorShift_Bottom = Color3.fromRGB(11, 0, 20)
+L.ColorShift_Top = Color3.fromRGB(240, 127, 14)
+L.OutdoorAmbient = Color3.fromRGB(34, 0, 49)
+L.ClockTime = 6.7
+L.FogColor = Color3.fromRGB(94, 76, 106)
+L.FogEnd = 1000
+L.FogStart = 0
+L.ExposureCompensation = 0.24
+L.ShadowSoftness = 0
+L.Ambient = Color3.fromRGB(59, 33, 27)
+
+        end
+    })
+
+ 
+    MainSection:AddToggle({
+        Name = 'Full Bright',
+        Callback = function()
+    pcall(function()
+        local lighting = game:GetService("Lighting");
+        lighting.Ambient = Color3.fromRGB(255, 255, 255);
+        lighting.Brightness = 1;
+        lighting.FogEnd = 1e10;
+        for i, v in pairs(lighting:GetDescendants()) do
+            if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("SunRaysEffect") then
+                v.Enabled = false;
+            end;
+        end;
+        lighting.Changed:Connect(function()
+            lighting.Ambient = Color3.fromRGB(255, 255, 255);
+            lighting.Brightness = 1;
+            lighting.FogEnd = 1e10;
+        end);
+        spawn(function()
+            local character = game:GetService("Players").LocalPlayer.Character;
+            while wait() do
+                repeat wait() until character ~= nil;
+                if not character.HumanoidRootPart:FindFirstChildWhichIsA("PointLight") then
+                    local headlight = Instance.new("PointLight", character.HumanoidRootPart);
+                    headlight.Brightness = 1;
+                    headlight.Range = 60;
+                end;
+            end;
+        end);
+    end)
+        end
+    })
+        
+    local function onToggleChangedInstantProximity(state)
+        local function setProximityPromptHoldDuration()
+            
+            for _, descendant in pairs(workspace:GetDescendants()) do
+                
+                if descendant:IsA("ProximityPrompt") then
+                    
+                    descendant.HoldDuration = 0
+                end
+            end
+        end
+
+        if state then
+            setProximityPromptHoldDuration()
+
+            workspace.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("ProximityPrompt") then
+                    descendant.HoldDuration = 0
+                end
+            end)
+        end
+    end
+
+    MainSection:AddToggle({
+        Name = 'Instant Interact',
+        Callback = function(state)
+            onToggleChangedInstantProximity(state)
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = "Infinite Zoom",
+        Callback = function(Value)
+            getgenv().host = game:GetService'Players'.LocalPlayer
+
+    host.CameraMaxZoomDistance = math.huge
+        end
+    })
+
+    local CFspeed = 50
+    local CFloop
+    local isRunning = false
+
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    local head = character:WaitForChild("Head")
+    local runService = game:GetService("RunService")
+
+    if not humanoid or not head then
+        return
+    end
+
+    local function start()
+        if isRunning then return end
+        isRunning = true
+
+        humanoid.PlatformStand = true
+        head.Anchored = true
+
+        CFloop = runService.Heartbeat:Connect(function(deltaTime)
+            local moveDirection = humanoid.MoveDirection * (CFspeed * deltaTime)
+            local headCFrame = head.CFrame
+            local cameraCFrame = workspace.CurrentCamera.CFrame
+            local cameraOffset = headCFrame:ToObjectSpace(cameraCFrame).Position
+            cameraCFrame = cameraCFrame * CFrame.new(-cameraOffset.X, -cameraOffset.Y, -cameraOffset.Z + 1)
+            local cameraPosition = cameraCFrame.Position
+            local headPosition = headCFrame.Position
+
+            local objectSpaceVelocity = CFrame.new(
+                cameraPosition,
+                Vector3.new(headPosition.X, cameraPosition.Y, headPosition.Z)
+            ):VectorToObjectSpace(moveDirection)
+
+            head.CFrame = CFrame.new(headPosition) * (cameraCFrame - cameraPosition) * CFrame.new(objectSpaceVelocity)
+        end)
+    end
+
+    local function stop()
+        if not isRunning then return end
+        isRunning = false
+
+        if CFloop then
+            CFloop:Disconnect()
+            CFloop = nil
+        end
+
+        humanoid.PlatformStand = false
+        head.Anchored = false
+    end
+    MainSection:AddToggle({
+        Name = "CFrame Fly", 
+        Keybind = {
+            Mode = "Toggle"
+        },
+        Callback = function(Value)
+            if Value then
+                start()
+            else
+                stop()
+            end
+        end,
+    })
+
+    MainSection:AddToggle({
+        Name = 'CTRL + Click = Delete',
+        Callback = function()
+    local Plr = game:GetService("Players").LocalPlayer
+    local Mouse = Plr:GetMouse()
+
+    Mouse.Button1Down:connect(function()
+    if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+    if not Mouse.Target then return end
+    Mouse.Target:Destroy()
+    end)
+        end
+    })
+
+    local MainSection = GeneralTab:CreateSection({
+        Name = ' |Target Options|',
+        Side = 'Right'  -- 'Left' or 'Right'
+    })
+
+    ---\\TARGET SECTION (MAIN TAB)//---
+    local TargetName = ""
+    local originalCameraSubject
+    local ScreenGui
+
+    local function findPlayerByName(name)
+        name = string.lower(name)
+        for _, player in pairs(game.Players:GetPlayers()) do
+            local playerName = string.lower(player.Name)
+            local displayName = player.DisplayName and string.lower(player.DisplayName) or nil
+            
+            if string.sub(playerName, 1, #name) == name or (displayName and string.sub(displayName, 1, #name) == name) then
+                return player
+            end
+        end
+        return nil
+    end
+
+    MainSection:AddTextbox({
+        Name = "       <-Target Name->",
+        Value = TargetName,
+        Callback = function(input)
+            local player = findPlayerByName(input)
+            TargetName = player and player.Name or ""
+        end
+    })
+
+    local function createInventoryGUI(playerName)
+        if ScreenGui then
+            ScreenGui:Destroy() 
+        end
+
+        ScreenGui = Instance.new("ScreenGui")
+        local Background = Instance.new("Frame")
+        local ScrollFrame = Instance.new("ScrollingFrame")
+        local TitleLabel = Instance.new("TextLabel")
+        local UIListLayout = Instance.new("UIListLayout")
+        local UIListPadding = Instance.new("UIPadding")
+        local InvLabels = {}
+
+        ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+        Background.Name = "Background"
+        Background.Parent = ScreenGui
+        Background.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+        Background.BorderSizePixel = 2
+        Background.BorderColor3 = Color3.fromRGB(0, 0, 0)
+        Background.Position = UDim2.new(1, -260, 0, 20)
+        Background.Size = UDim2.new(0.12, 0, 0.3, 0)
+        Background.ClipsDescendants = true
+
+        local gradient = Instance.new("UIGradient")
+        gradient.Parent = Background
+        gradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(42, 42, 42)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(42, 42, 42))
+        }
+        gradient.Rotation = 45
+
+        local stroke = Instance.new("UIStroke")
+        stroke.Parent = Background
+        stroke.Color = Color3.fromRGB(0, 0, 0)
+        stroke.Thickness = 2
+        stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+        TitleLabel.Name = "TitleLabel"
+        TitleLabel.Parent = Background
+        TitleLabel.BackgroundTransparency = 1
+        TitleLabel.Size = UDim2.new(1, 0, 0, 30)
+        TitleLabel.Font = Enum.Font.SourceSansBold
+        TitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TitleLabel.TextSize = 18
+        TitleLabel.TextScaled = true
+        TitleLabel.TextWrapped = true
+        TitleLabel.TextStrokeTransparency = 0.3
+        TitleLabel.Text = "Inventory"
+
+        ScrollFrame.Parent = Background
+        ScrollFrame.Size = UDim2.new(1, -10, 0, 250)
+        ScrollFrame.Position = UDim2.new(0, 5, 0, 35)
+        ScrollFrame.ScrollBarThickness = 10
+        ScrollFrame.BackgroundTransparency = 1
+        ScrollFrame.ClipsDescendants = true
+
+        UIListLayout.Parent = ScrollFrame
+        UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 5)
+
+        UIListPadding.Parent = ScrollFrame
+        UIListPadding.PaddingTop = UDim.new(0, 5)
+
+        local function createLabel(name)
+            local label = Instance.new("TextLabel")
+            label.Name = name
+            label.BackgroundTransparency = 0.5
+            label.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+            label.BorderSizePixel = 1
+            label.BorderColor3 = Color3.fromRGB(30, 30, 30)
+            label.Size = UDim2.new(1, -10, 0, 22)
+            label.Font = Enum.Font.SourceSans
+            label.TextColor3 = Color3.fromRGB(255, 255, 255)
+            label.TextScaled = true
+            label.TextSize = 14
+            label.TextWrapped = true
+            return label
+        end
+
+        for i = 1, 40 do
+            local label = createLabel("Inv" .. i)
+            label.Parent = ScrollFrame
+            table.insert(InvLabels, label)
+        end
+
+        local function getPlayerInventory(targetPlayer)
+            local backpack = targetPlayer:FindFirstChildOfClass("Backpack")
+            if backpack then
+                local items = backpack:GetChildren()
+                for i, label in ipairs(InvLabels) do
+                    label.Text = items[i] and items[i].Name or ""
+                end
+                ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, math.max(#items, #InvLabels) * 27)
+            else
+                for _, label in ipairs(InvLabels) do
+                    label.Text = "No Items"
+                end
+                ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 27)
+            end
+        end
+
+        local targetPlayer = findPlayerByName(playerName)
+
+        if targetPlayer then
+            TitleLabel.Text = playerName .. "'s Inventory"
+            getPlayerInventory(targetPlayer)
+        else
+            TitleLabel.Text = "Player Not Found"
+        end
+    end
+
+    MainSection:AddToggle({
+        Name = "| View [Inventory]",
+        Flag = "TGSection_View[Inventory]",
+        Callback = function(State)
+            if State then
+                createInventoryGUI(TargetName)
+            else
+                if ScreenGui then
+                    ScreenGui:Destroy()
+                    ScreenGui = nil
+                end
+            end
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = "Spectate",
+        Callback = function(Value)
+            local Players = game:GetService("Players")
+            local LocalPlayer = Players.LocalPlayer
+
+            if Value then
+                if IsSpectating then
+                    return
+                end
+
+                local TargetPlayer = Players:FindFirstChild(TargetName)
+
+                if TargetPlayer and TargetPlayer.Character then
+                    originalCameraSubject = workspace.CurrentCamera.CameraSubject
+                    workspace.CurrentCamera.CameraSubject = TargetPlayer.Character:FindFirstChild("Humanoid")
+                    IsSpectating = true
+                else
+                    CreateNotification({
+                        Title = "Error",
+                        Text = "Invalid Name",
+                        ButtonText = "Okay",
+                        Duration = 99999
+                    })
+                end
+            else
+                if IsSpectating then
+                    workspace.CurrentCamera.CameraSubject = originalCameraSubject
+                    IsSpectating = false
+                end
+            end
+        end,
+    })
+
+    local MainSection = GeneralTab:CreateSection({
+        Name = 'Spawn | Locations',
+        Side = 'Left'  -- 'Left' or 'Right'
+    })
+
+      MainSection:AddLabel({
+        Text = "Cant be Far"
+    })
+
+    ---\\SPAWN LOCATION (MAIN TAB)//---
+local selectedSpawnPoint = nil
+local spawnActivated = false
+local Tweening = false
+local currentTween = nil
+local characterAddedConnection = nil
+
+local spawnLocations = {
+    ["Fake ID"] = CFrame.new(214.915741, 4.03285742, -332.346008, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+    ["Gun Store 2"] = CFrame.new(-493.9350280761719, 3.8621325492858887, 360.4673156738281),
+    ["Boxing Gym"] = CFrame.new(-563.9724731445312, 3.5371451377868652, -66.1060562133789),
+    ["Garbage Job"] = CFrame.new(717.6341552734375, 3.537200450897217, 161.44554138183594),
+    ["Bank"] = CFrame.new(-56.422027587890625, 3.7371387481689453, -329.57785034179688),
+    ["Studio"] = CFrame.new(468.3650207519531, 4.112238883972168, 159.92874145507812),
+    ["Police Station"] = CFrame.new(748.6831665039062, 4.912145614624023, -255.74874877929688),
+    ["Car Shop"] = CFrame.new(730.1787109375, 3.709824562072754, 449.9476013183594),
+    ["Cosmic Cuts"] = CFrame.new(57.606021881103516, 3.7371392250061035, -64.30176544189453),
+    ["Pluto's Headwear"] = CFrame.new(-269.45611572265625, 3.8895010948181152, -333.55609130859375),
+    ["B&b (Glasses Store)"] = CFrame.new(-696.83935546875, 3.6121320724487305, -335.316162109375),
+    ["Bronx Sneaker Club"] = CFrame.new(525.310791015625, 3.487133026123047, -197.16981506347656),
+    ["Kevins Drip"] = CFrame.new(-202.83302307128906, 3.487137794494629, -59.08943557739258),
+    ["Apartments 1"] = CFrame.new(-518.384765625, 3.7872252464294434, 210.3058624267578),
+    ["Apartments 2"] = CFrame.new(-276.6080627441406, 4.362135887145996, -475.66217041015625),
+    ["Apartments 3"] = CFrame.new(215.5399627685547, 5.237135887145996, 26.223546981811523)
+}
+
+MainSection:AddDropdown({
+    Name = "Spawn/Tween Locations",
+    List = {"Gun Store 2", "Boxing Gym", "Fake ID", "Garbage Job", "Bank", "Studio", "Police Station", "Car Shop", "Cosmic Cuts", "Pluto's Headwear", "B&b (Glasses Store)", "Bronx Sneaker Club", "Kevins Drip", "Apartments 1", "Apartments 2", "Apartments 3"},
+    Callback = function(item)
+        selectedSpawnPoint = spawnLocations[item]
+    end
+})
+
+local function applyCustomization(character)
+    local player = game.Players.LocalPlayer
+    local bodyColors = player:FindFirstChild("BodyColors")
+    if character:FindFirstChild("BodyColors") and bodyColors then
+        character.BodyColors.HeadColor = bodyColors.HeadColor
+        character.BodyColors.TorsoColor = bodyColors.TorsoColor
+        character.BodyColors.LeftArmColor = bodyColors.LeftArmColor
+        character.BodyColors.RightArmColor = bodyColors.RightArmColor
+        character.BodyColors.LeftLegColor = bodyColors.LeftLegColor
+        character.BodyColors.RightLegColor = bodyColors.RightLegColor
+    end
+end
+
+local function teleportToSpawnPoint()
+    local player = game.Players.LocalPlayer
+    if selectedSpawnPoint then
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character:SetPrimaryPartCFrame(selectedSpawnPoint)
+        end
+    end
+end
+
+local function onCharacterAdded(character)
+    character:WaitForChild("HumanoidRootPart")
+    applyCustomization(character)
+    if spawnActivated then
+        wait(1.0)
+        teleportToSpawnPoint()
+    end
+end
+
+local function clearCharacterAddedConnection()
+    if characterAddedConnection then
+        characterAddedConnection:Disconnect()
+        characterAddedConnection = nil
+    end
+end
+
+-- Disconnect the old connection before setting a new one
+clearCharacterAddedConnection()
+characterAddedConnection = game.Players.LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+
+MainSection:AddToggle({
+    Name = "| Set Spawn Point",
+    Flag = "SPSection_SpawnPoint",
+    Callback = function(state)
+        spawnActivated = state
+        if state then
+            clearCharacterAddedConnection()
+            characterAddedConnection = game.Players.LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
+        else
+            clearCharacterAddedConnection()
+        end
+    end
+})
+
+local function TweenToLocation(targetPosition)
+    if not Tweening then return end
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local humanoidRootPart = character.HumanoidRootPart
+        local startPosition = humanoidRootPart.Position
+        local distance = (startPosition - targetPosition).Magnitude
+        local fixedSpeed = 18
+        local duration = distance / fixedSpeed
+        local startTime = tick()
+
+        character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, false)
+        character.Humanoid:ChangeState(Enum.HumanoidStateType.None)
+
+        currentTween = coroutine.create(function()
+            while tick() - startTime < duration and Tweening do
+                local elapsedTime = tick() - startTime
+                local alpha = elapsedTime / duration
+                local newPosition = startPosition:Lerp(targetPosition, alpha)
+                humanoidRootPart.CFrame = CFrame.new(newPosition)
+                task.wait()
+            end
+
+            if Tweening then
+                humanoidRootPart.CFrame = CFrame.new(targetPosition)
+            end
+
+            character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping, true)
+        end)
+
+        coroutine.resume(currentTween)
+    else
+        warn("HumanoidRootPart not found!")
+    end
+end
+
+MainSection:AddToggle({
+    Name = "| Tween Now",
+    Flag = "SPSection_TweenNow",
+    Callback = function(state)
+        Tweening = state
+
+        if Tweening and selectedSpawnPoint then
+            TweenToLocation(selectedSpawnPoint.Position)
+        elseif not Tweening and currentTween then
+            coroutine.yield(currentTween)
+            currentTween = nil
+        end
+    end
+})
+
+    local MainSection = GeneralTab:CreateSection({
+        Name = 'Server Settings',
+        Side = 'Left'  -- 'Left' or 'Right'
+    })
+
+    MainSection:AddButton({
+        Name = "Rejoin Server",
+        Callback = function()
+            local ts = game:GetService("TeleportService")
+            local p = game:GetService("Players").LocalPlayer
+            ts:Teleport(game.PlaceId, p) 
+        end
+    })
+
+    MainSection:AddButton({
+        Name = "Join Lowest Server",
+        Callback = function()
+            local Http = game:GetService("HttpService")
+            local TPS = game:GetService("TeleportService")
+            local Api = "https://games.roblox.com/v1/games/"
+            
+            local _place = game.PlaceId
+            local _servers = Api.._place.."/servers/Public?sortOrder=Asc&limit=100"
+            function ListServers(cursor)
+                local Raw = game:HttpGet(_servers .. ((cursor and "&cursor="..cursor) or ""))
+                return Http:JSONDecode(Raw)
+            end
+            
+            local Server, Next; repeat
+                local Servers = ListServers(Next)
+                Server = Servers.data[1]
+                Next = Servers.nextPageCursor
+            until Server
+            
+            TPS:TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
+        end
+    })
+
+    MainSection:AddButton({
+        Name = "Anti Afk",
+        Callback = function()
+            local Players = game:GetService('Players')
+            local VirtualUser = game:GetService('VirtualUser')
+            local StarterGui = game:GetService('StarterGui')
+            
+            local player = Players.LocalPlayer
+            
+            player.Idled:connect(function()
+                
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end)
+        end
+    })
+
+    MainSection:AddButton({
+        Name = "Server Hop",
+        Callback = function()
+
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    local File = pcall(function()
+        AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+    end)
+    if not File then
+        table.insert(AllIDs, actualHour)
+        writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+    end
+
+    function TPReturner()
+        local Site
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                for _,Existing in pairs(AllIDs) do
+                    if num ~= 0 then
+                        if ID == tostring(Existing) then
+                            Possible = false
+                        end
+                    else
+                        if tonumber(actualHour) ~= tonumber(Existing) then
+                            local delFile = pcall(function()
+                                delfile("NotSameServers.json")
+                                AllIDs = {}
+                                table.insert(AllIDs, actualHour)
+                            end)
+                        end
+                    end
+                    num = num + 1
+                end
+                if Possible == true then
+                    table.insert(AllIDs, ID)
+                    wait()
+                    pcall(function()
+                        writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                        wait()
+                        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                    end)
+                    wait(4)
+                end
+            end
+        end
+    end
+
+    function Teleport()
+        while wait() do
+            pcall(function()
+                TPReturner()
+                if foundAnything ~= "" then
+                    TPReturner()
+                end
+            end)
+        end
+    end
+
+    Teleport()
+        end
+    })
+
+    local MainSection = GeneralTab:CreateSection({
+        Name = '|Atm Mods|',
+        Side = 'Right'  -- 'Left' or 'Right'
+    })
+
+    MainSection:AddToggle({
+        Name = "| Enable all Atms",
+        Flag = "ATMSection_EnableallAtms",
+        Callback = function(state)
+            local function enableProximityPrompt(prompt)
+                if prompt then
+                    prompt.Enabled = state
+                end
+            end
+
+            local atmNames = {
+                "ATM1", "ATM2", "ATM3", "ATM4", "ATM5",
+                "ATM6", "ATM7", "ATM8", "ATM9", "ATM10",
+                "ATM11", "ATM12", "ATM13", "ATM14", "ATM15"
+            }
+
+            for _, atmName in ipairs(atmNames) do
+                local atm = workspace.Map.ATMS:FindFirstChild(atmName)
+                if atm then
+                    local proximityPrompt = atm:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt")
+                    enableProximityPrompt(proximityPrompt)
+                end
+            end
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = "| View ATM List",
+        Flag = "ATMSection_ViewAtmList",
+        Callback = function(state)
+            local player = game.Players.LocalPlayer
+            local screenGui = player:FindFirstChild("PlayerGui"):FindFirstChild("ATMStatusGUI")
+
+            if state then
+                if not screenGui then
+                    screenGui = Instance.new("ScreenGui")
+                    screenGui.Name = "ATMStatusGUI"
+                    screenGui.Parent = player:WaitForChild("PlayerGui")
+
+                    local frame = Instance.new("Frame")
+                    frame.Size = UDim2.new(0, 300, 0, 400)
+                    frame.Position = UDim2.new(1, -320, 0.5, -200)
+                    frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+                    frame.BackgroundTransparency = 0.2
+                    frame.BorderSizePixel = 0
+                    frame.Parent = screenGui
+
+                    local corner = Instance.new("UICorner")
+                    corner.CornerRadius = UDim.new(0, 10)
+                    corner.Parent = frame
+
+                    local shadow = Instance.new("ImageLabel")
+                    shadow.AnchorPoint = Vector2.new(0.5, 0.5)
+                    shadow.Position = UDim2.new(0.5, 0, 0.5, 5)
+                    shadow.Size = UDim2.new(1, 40, 1, 40)
+                    shadow.BackgroundTransparency = 1
+                    shadow.Image = "rbxassetid://1316045217"  
+                    shadow.ImageTransparency = 0.7
+                    shadow.ZIndex = -1
+                    shadow.Parent = frame
+
+                    local title = Instance.new("TextLabel")
+                    title.Size = UDim2.new(1, 0, 0, 40)
+                    title.BackgroundTransparency = 1
+                    title.Text = "ATM Status"
+                    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    title.TextScaled = true
+                    title.Font = Enum.Font.GothamBold
+                    title.TextStrokeTransparency = 0.75
+                    title.Parent = frame
+
+                    local titleGradient = Instance.new("UIGradient")
+                    titleGradient.Color = ColorSequence.new{
+                        ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
+                        ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200))
+                    }
+                    titleGradient.Rotation = 90
+                    titleGradient.Parent = title
+
+                    local scrollingFrame = Instance.new("ScrollingFrame")
+                    scrollingFrame.Size = UDim2.new(1, -10, 1, -50)
+                    scrollingFrame.Position = UDim2.new(0, 5, 0, 45)
+                    scrollingFrame.BackgroundTransparency = 1
+                    scrollingFrame.ScrollBarThickness = 8
+                    scrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(120, 120, 120)
+                    scrollingFrame.Parent = frame
+
+                    local uiListLayout = Instance.new("UIListLayout")
+                    uiListLayout.Parent = scrollingFrame
+                    uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+                    uiListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+                    uiListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+                    uiListLayout.Padding = UDim.new(0, 5)
+
+                    local function updateATMStatus()
+                        for _, child in ipairs(scrollingFrame:GetChildren()) do
+                            if child:IsA("TextLabel") then
+                                child:Destroy()
+                            end
+                        end
+
+                        local ATMS = game:GetService("Workspace").Map:WaitForChild("ATMS")
+                        local labels = {}
+
+                        for i = 1, 15 do
+                            local atmName = "ATM: " .. i
+                            local atm = ATMS:FindFirstChild("ATM" .. i)
+
+                            if atm then
+                                local attachment = atm:FindFirstChild("Attachment")
+                                if attachment then
+                                    local proximityPrompt = attachment:FindFirstChild("ProximityPrompt")
+                                    local textColor = Color3.fromRGB(255, 0, 0) 
+                                    if proximityPrompt and proximityPrompt.Enabled then
+                                        textColor = Color3.fromRGB(0, 255, 0)  
+                                    end
+
+                                    local textLabel = Instance.new("TextLabel")
+                                    textLabel.Size = UDim2.new(1, -20, 0, 25)
+                                    textLabel.BackgroundTransparency = 0.1
+                                    textLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+                                    textLabel.Text = atmName
+                                    textLabel.TextColor3 = textColor 
+                                    textLabel.TextScaled = true
+                                    textLabel.Font = Enum.Font.Gotham
+                                    textLabel.TextXAlignment = Enum.TextXAlignment.Left
+                                    textLabel.TextYAlignment = Enum.TextYAlignment.Center
+                                    textLabel.Parent = scrollingFrame
+
+                                    local labelCorner = Instance.new("UICorner")
+                                    labelCorner.CornerRadius = UDim.new(0, 6)
+                                    labelCorner.Parent = textLabel
+
+                                    local labelGradient = Instance.new("UIGradient")
+                                    labelGradient.Color = ColorSequence.new{
+                                        ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 60, 60)),
+                                        ColorSequenceKeypoint.new(1, Color3.fromRGB(80, 80, 80))
+                                    }
+                                    labelGradient.Rotation = 90
+                                    labelGradient.Parent = textLabel
+                                    
+                                    table.insert(labels, textLabel)
+                                end
+                            end
+                        end
+
+                        local contentHeight = #labels * 30  
+                        scrollingFrame.CanvasSize = UDim2.new(0, 0, 0, contentHeight)
+                    end
+
+                    updateATMStatus()
+
+                    local connection
+                    connection = game:GetService("RunService").Heartbeat:Connect(function()
+                        if state then
+                            updateATMStatus()
+                        else
+                            if connection then connection:Disconnect() end
+                        end
+                    end)
+                end
+            else
+                if screenGui then
+                    screenGui:Destroy()
+                end
+            end
+        end
+    })
+
+    local function fireproximityprompt(ProximityPrompt, Amount, Skip)
+        assert(ProximityPrompt, "Argument #1 Missing or nil")
+        assert(typeof(ProximityPrompt) == "Instance" and ProximityPrompt:IsA("ProximityPrompt"), "Attempted to fire a Value that is not a ProximityPrompt")
+
+        local HoldDuration = ProximityPrompt.HoldDuration
+        if Skip then
+            ProximityPrompt.HoldDuration = 0
+        end
+
+        for i = 1, Amount or 1 do
+            ProximityPrompt:InputHoldBegin()
+            if Skip then
+                local RunService = game:GetService("RunService")
+                local Start = os.time()
+                repeat
+                    RunService.Heartbeat:Wait(0.1)
+                until os.time() - Start > HoldDuration
+            end
+            ProximityPrompt:InputHoldEnd()
+        end
+        ProximityPrompt.HoldDuration = HoldDuration
+    end
+
+    MainSection:AddButton({
+        Name = "Interact with a Active ATM",
+        Callback = function()
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            local camera = workspace.CurrentCamera
+
+            local ATMS = {
+                {name = "ATM1", cframe = CFrame.new(-33.1487, 3.7370, -299.5453), path = "ATM1"},
+                {name = "ATM2", cframe = CFrame.new(538.4818, 3.7371, -349.0415), path = "ATM2"},
+                {name = "ATM3", cframe = CFrame.new(497.8156, 3.7839, 405.5681), path = "ATM3"},
+                {name = "ATM4", cframe = CFrame.new(236.1748, 3.1180, -165.3973), path = "ATM4"},
+                {name = "ATM5", cframe = CFrame.new(-652.0219, 4.2857, 155.1690), path = "ATM5"},
+                {name = "ATM6", cframe = CFrame.new(-455.1304, 4.3107, 370.8311), path = "ATM6"},
+                {name = "ATM7", cframe = CFrame.new(-266.3022, 4.4058, -212.2364), path = "ATM7"},
+                {name = "ATM8", cframe = CFrame.new(-10.4940, 3.7371, 233.9844), path = "ATM8"},
+                {name = "ATM9", cframe = CFrame.new(717.0417, 3.8176, 413.7101), path = "ATM9"},
+                {name = "ATM10", cframe = CFrame.new(-536.8209, 4.2857, -20.3541), path = "ATM10"},
+                {name = "ATM11", cframe = CFrame.new(-652.021, 4.285, 155.169), path = "ATM11"},
+                {name = "ATM12", cframe = CFrame.new(714.4320, 4.2857, -240.3657), path = "ATM12"},
+                {name = "ATM13", cframe = CFrame.new(-314.9244, 3.8715, 145.9376), path = "ATM13"},
+                {name = "ATM14", cframe = CFrame.new(-377.9388, 4.3107, -359.7116), path = "ATM14"},
+                {name = "ATM15", cframe = CFrame.new(360.0960, 3.7371, -359.4165), path = "ATM15"},
+            }
+
+            for _, atm in ipairs(ATMS) do
+                local atmPath = workspace:FindFirstChild("Map"):FindFirstChild("ATMS"):FindFirstChild(atm.path)
+                if atmPath and atmPath:FindFirstChild("Attachment") then
+                    local proximityPrompt = atmPath.Attachment:FindFirstChild("ProximityPrompt")
+                    if proximityPrompt and proximityPrompt.Enabled then
+                        
+                        humanoidRootPart.CFrame = atm.cframe
+                        
+                        local cameraOffset = Vector3.new(0, 5, -10) 
+                        camera.CFrame = CFrame.new(humanoidRootPart.Position + cameraOffset, atm.cframe.Position)
+
+                        wait(0.2)
+                        
+                        fireproximityprompt(proximityPrompt, 1, true)
+                        
+                        return
+                    end
+                end
+            end
+        end
+    })
+
+    local GeneralTab = Window:CreateTab({Name = 'Visuals'})
+    local MainSection = GeneralTab:CreateSection({
+        Name = 'Visuals',
+        Side = 'Left'
+    })
+
+    MainSection:AddToggle({
+        Name = 'Box',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet('https://pastebin.com/raw/0paikb5N'))()
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = 'Name',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet('https://pastebin.com/raw/SDSsfiVN'))()
+        end
+    }) 
+
+    MainSection:AddToggle({
+        Name = 'Show Guns',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/hellmid122/script-0x391/main/guns"))()
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = 'Health',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet('https://pastebin.com/raw/mxLC8P1L'))()
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = 'Distance',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet('https://pastebin.com/raw/nDnBxSyZ'))()
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = 'Skeleton',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/melvin123gp/shit/refs/heads/main/skeleto"))()()
+        end
+    })
+
+    MainSection:AddToggle({
+        Name = 'Cham',
+        Value = false,          -- Default state
+        Flag = 'feature_toggle', -- Unique identifier
+        Locked = false,         -- Prevent user changes
+        Callback = function(state)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/melvin123gp/e21/refs/heads/main/111"))()()
+        end
+    })
+
+    local MainTab = Window:CreateTab({Name = 'Aiming'})
+
+    local MainSection = MainTab:CreateSection({
+        Name = '|Mods|',
+        Side = 'Right'  -- 'Left' or 'Right'
+    })
+    function updateHeads()
+        for k,v in next, game:GetService('Players'):GetChildren() do 
+            oghead = v.Character:FindFirstChild('Head')
+            if oghead then 
+            oghead.Size = Vector3.new(2,2,2,2) 
+            game.Players.LocalPlayer.Character.Head.Size = Vector3.new(2,2,2,2)
+            end
+        end
+    end
+
+    MainSection:AddToggle({
+        Name = 'Big Head',
+        Value = false,
+        Flag = 'featuretoggle',
+        Locked = false,
+        Callback = function(state)
+            while state do
+                updateHeads()
+                task.wait(0.0000000000000000000000000001)
+            end
+        end
+    })
+
+    local Players = game:GetService("Players")
+
+
+    local isToggled = false
+
+
+    local function continuouslyUpdateWeaponStats(player)
+        while isToggled do 
+            local backpack = player:FindFirstChild("Backpack")
+            if backpack then
+                -- Loop through all items in the backpack
+                for _, item in ipairs(backpack:GetChildren()) do
+                    if item:IsA("Tool") then 
+                        if item:FindFirstChild("Ammo") and item:FindFirstChild("Mag") then
+                            item.Ammo.Value = 18
+                            item.Mag.Value = 25
+                        end
+                    end
+                end
+            end
+            wait(0.0000000001) 
+        end
+    end
+
+
+    MainSection:AddToggle({
+        Name = "Infinite Ammo",
+        Value = false,
+        Flag = "WeaponStatsToggle", 
+        Callback = function(Value)
+            isToggled = Value 
+            if isToggled then
+
+                for _, player in ipairs(Players:GetPlayers()) do
+                    task.spawn(function()
+                        continuouslyUpdateWeaponStats(player)
+                    end)
+                end
+            end
+        end,
+    })
+
+    MainSection:AddLabel({
+        Text = "MAG required 25 or = CRASH"
+    })
+
+    Library.Notify({
+        Text = 'YERO.WTF', 
+        Duration = 999999999999  -- Seconds
+    })
+
+    local MainSection = MainTab:CreateSection({
+        Name = 'Camlock KeyBind: RMB',
+        Side = 'Left'  -- 'Left' or 'Right'
+    })
+
+    MainSection:AddButton({
+        Name = 'Camlock',
+        Callback = function()
+            wait(1)local a=loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()local b=loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()b:Notify({Title="Fentanyl Private",Description="Loaded"},{OutlineColor=Color3.fromRGB(80,80,80),Time=5,Type="default"})local c=game:GetService("Workspace")local d=game:GetService("RunService")local e=game:GetService("UserInputService")local f=game:GetService("Players")local g=f.LocalPlayer;local h=g.Character;local i=h:FindFirstChild("HumanoidRootPart")local j=h:FindFirstChild("Humanoid")local k=g:GetMouse()local l=c.CurrentCamera;local m=g.TeamColor;local n=false;local o=false;local p=true;local q=.187;local r=Vector3.new(0,.1,0)_G.TeamCheck=false;_G.AimPart="HumanoidRootPart"_G.Sensitivity=0;_G.CircleSides=64;_G.CircleColor=Color3.fromRGB(255,0,130)_G.CircleTransparency=0;_G.CircleRadius=200;_G.CircleFilled=true;_G.CircleVisible=true;_G.CircleThickness=1;local s=Drawing.new("Circle")s.Position=Vector2.new(l.ViewportSize.X/2,l.ViewportSize.Y/2)s.Radius=_G.CircleRadius;s.Filled=_G.CircleFilled;s.Color=_G.CircleColor;s.Visible=_G.CircleVisible;s.Transparency=_G.CircleTransparency;s.NumSides=_G.CircleSides;s.Thickness=_G.CircleThickness;local function t()e.MouseBehavior=Enum.MouseBehavior.LockCenter end;local function u()n=false;o=false;p=false;e.MouseBehavior=Enum.MouseBehavior.Default end;function FindNearestPlayer()local v=math.huge;local w=nil;for x,y in pairs(f:GetPlayers())do if y~=g and y.Character:FindFirstChild("Humanoid")and y.Character:FindFirstChild("Humanoid").Health>0 and y.Character:FindFirstChild("HumanoidRootPart")and y then local z=y.Character;local A,B=l:WorldToViewportPoint(z[_G.AimPart].Position)if B then local C=(Vector2.new(k.X,k.Y)-Vector2.new(A.X,A.Y)).Magnitude;if C<v and C<s.Radius then v=C;w=z end end end end;return w end;e.InputBegan:Connect(function(D)if D.UserInputType==Enum.UserInputType.MouseButton2 then n=true;o=true;p=true;if o then local E=FindNearestPlayer()while n do task.wait(.000001)if p and E~=nil then local F=E.HumanoidRootPart.CFrame+E.HumanoidRootPart.Velocity*q+r;l.CFrame=CFrame.lookAt(l.CFrame.Position,F.Position)t()end end end end end)e.InputEnded:Connect(function(D)if D.UserInputType==Enum.UserInputType.MouseButton2 then u()end end)
+        end
+    })
+
+    local MainTab = Window:CreateTab({Name = 'Misc'})
+
+    local MainSection = MainTab:CreateSection({
+        Name = 'Patch Notes.V1',
+        Side = 'Right'  -- 'Left' or 'Right'
+    })
+
+    MainSection:AddLabel({
+        Text = "ADDED NEW TELEPORTS!"
+    })
+
+    MainSection:AddLabel({
+        Text = "REALISTIC SHADERS!"
+    })
+
+
+    local MainSection = MainTab:CreateSection({
+        Name = 'Misc',
+        Side = 'Left'  -- 'Left' or 'Right'
+    })
+
+       MainSection:AddToggle({
+        Name = "Vehicle Mods GUI",
+        Value = false,
+        Flag = "Toggle", 
+        Callback = function(State)
+            loadstring(game:HttpGet("https://pastebin.com/raw/r4QSQu72"))()
+        end,
+    })
+
+    local MainTab = Window:CreateTab({Name = 'Farms'})
+
+local MainSection = MainTab:CreateSection({
+    Name = 'Game!',
+    Side = 'Left'  -- 'Left' or 'Right'
+})
+
+    MainSection:AddButton({
+    Name = 'Mod Detection',
+    Callback = function()
+       local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local modAdminOwnerList = {
+    ["GroupHolderCosmic"] = true,
+    ["Halax"] = true,
+    ["zCxsmic"] = true,
+    ["555wick"] = true,
+    ["Skythrill9"] = true
+}
+
+local function createNoModGui()
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Parent = game:GetService("CoreGui") -- Using CoreGui to ensure visibility
+
+    local TextLabel = Instance.new("TextLabel")
+    TextLabel.Parent = ScreenGui
+    TextLabel.Size = UDim2.new(0, 200, 0, 50)
+    TextLabel.Position = UDim2.new(0.5, -100, 0.5, -25) -- Centered
+    TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel.Text = "No mod in"
+    TextLabel.TextScaled = true
+
+    -- Destroy GUI after 3 seconds
+    task.wait(3)
+    ScreenGui:Destroy()
+end
+
+local function checkForMods()
+    for  player in pairs(Players:GetPlayers()) do
+        if modAdminOwnerList[player.Name] then
+            LocalPlayer:Kick("One of the mod/admin is in game")
+            return -- Stops execution after kicking
+        end
+    end
+
+    -- If no mod is found, show GUI
+    createNoModGui()
+end
+
+-- Check if a mod/admin joins later
+Players.PlayerAdded:Connect(function(player)
+    if modAdminOwnerList[player.Name] then
+        LocalPlayer:Kick("One of the mod/admin is in game")
+    end
+end)
+
+-- Initial check when the script runs
+checkForMods()
+    end
+})
+
+
+    local MainSection = MainTab:CreateSection({
+        Name = 'Farms',
+        Side = 'Right'  -- 'Left' or 'Right'
+    })
+
+    MainSection:AddLabel({
+        Text = "Keybind: Delete"
+    })
+
+        MainSection:AddButton({
+    Name = 'Box',
+    Callback = function()
+        local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+local humanoid = character:WaitForChild("Humanoid")
+
+local running = true
+
+local function walkToPosition(targetPosition, description)
+    if not running then return end
+    print("Walking to: " .. description)
+    humanoid:MoveTo(targetPosition)
+    humanoid.MoveToFinished:Wait()
+end
+
+local function tweenToPosition(targetPosition, description)
+    if not running then return end
+    print("Moving to: " .. description)
+    local distance = (humanoidRootPart.Position - targetPosition).magnitude
+    local tweenInfo = TweenInfo.new(distance / 20, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+    local goal = {CFrame = CFrame.new(targetPosition)}
+    local tween = TweenService:Create(humanoidRootPart, tweenInfo, goal)
+    tween:Play()
+    tween.Completed:Wait()
+end
+
+local function fireProximityPrompt(prompt, description)
+    if not running then return end
+    print("Firing ProximityPrompt: " .. description)
+    if prompt and prompt:IsA("ProximityPrompt") then
+        fireproximityprompt(prompt)
+    end
+end
+
+local function hasCrate()
+    for _, item in ipairs(player.Backpack:GetChildren()) do
+        if item.Name == "Crate" then
+            return true
+        end
+    end
+    return false
+end
+
+local function equipCrate()
+    if not running then return end
+    print("Equipping Crate")
+    local backpack = player.Backpack
+    local crate = backpack:FindFirstChild("Crate")
+    if crate then
+        character.Humanoid:EquipTool(crate)
+    end
+end
+
+local function isCrateGone()
+    return not hasCrate() and not character:FindFirstChild("Crate")
+end
+
+local function toggleRunning()
+    running = not running
+    print(running and "Script Started" or "Script Stopped")
+end
+
+local function onCharacterDeath()
+    print("Character died, restarting script...")
+    running = false
+    task.wait(30)
+    running = true
+end
+
+humanoid.Died:Connect(onCharacterDeath)
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.Delete then
+        toggleRunning()
+    end
+end)
+
+while true do
+    if running then
+        walkToPosition(Vector3.new(-551.4426, 3.5371, -85.6194), "Crates Location")
+
+        local cratePrompt = workspace:FindFirstChild("PlaceHere") and workspace.PlaceHere.Attachment:FindFirstChild("ProximityPrompt")
+        if cratePrompt then
+            while not hasCrate() and running do
+                fireProximityPrompt(cratePrompt, "Picking up Crate")
+                task.wait(0.5)
+            end
+        end
+
+        tweenToPosition(Vector3.new(-542.4784, 3.5371, -82.6257), "Waypoint 1")
+        tweenToPosition(Vector3.new(-404.4160, 3.3621, -82.3717), "Waypoint 2") -- Now uses Tween
+        walkToPosition(Vector3.new(-401.8955, 3.3621, -72.6088), "Waypoint 3")
+
+        equipCrate()
+
+        local dropPrompt = workspace.cratetruck2.Model.ClickBox.Attachment:FindFirstChild("ProximityPrompt")
+        if dropPrompt then
+            while not isCrateGone() and running do
+                fireProximityPrompt(dropPrompt, "Dropping off Crate")
+                task.wait(0.5)
+            end
+        end
+
+        walkToPosition(Vector3.new(-401.8955, 3.3621, -72.6088), "Returning: Waypoint 3")
+        walkToPosition(Vector3.new(-404.4160, 3.3621, -82.3717), "Returning: Waypoint 2")
+        tweenToPosition(Vector3.new(-542.4784, 3.5371, -82.6257), "Returning: Waypoint 1")
+        
+        walkToPosition(Vector3.new(-551.4426, 3.5371, -85.6194), "Returning to Crates Location")
+    end
+    task.wait(0.1)
+end
+    end
+})
