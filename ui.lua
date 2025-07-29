@@ -252,17 +252,6 @@ end)
 
 
 
-
-
-
-Troll:AddButton("Spam Call Police", function()
-    for i = 1,getgenv().intsdp do
-        task.wait(0.05)
-        game:GetService("ReplicatedStorage").CallPolice:FireServer()
-    end
-end)
-
-
 local localPlayer = game:GetService("Players").LocalPlayer
 local uis = game:GetService("UserInputService")
 local rs = game:GetService("RunService")
