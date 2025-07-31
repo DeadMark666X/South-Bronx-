@@ -1,13 +1,15 @@
--- YoxanHub | South Bronx | UI by OrionLib (Sidebar Style)
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
+-- YoxanHub | OrionLib Version | by historiaxw
+if game.CoreGui:FindFirstChild("Orion") then
+    game.CoreGui:FindFirstChild("Orion"):Destroy()
+end
 
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 local Window = OrionLib:MakeWindow({
     Name = "YoxanHub | South Bronx",
     HidePremium = false,
-    SaveConfig = true,
-    ConfigFolder = "YoxanSB",
-    IntroEnabled = true,
-    IntroText = "Welcome to YoxanHub",
+    SaveConfig = false,
+    ConfigFolder = "YoxanConfig",
+    IntroText = "Welcome to YoxanHub!",
 })
 
 -- Tabs
@@ -16,50 +18,23 @@ local MainTab = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-
 local VisualTab = Window:MakeTab({
-    Name = "Visual",
-    Icon = "rbxassetid://6031075938",
+    Name = "Visuals",
+    Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-
 local PlayerTab = Window:MakeTab({
     Name = "Player",
-    Icon = "rbxassetid://6031068426",
+    Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-
-local WeaponTab = Window:MakeTab({
-    Name = "Weapon",
-    Icon = "rbxassetid://6031068426",
+local TeleportTab = Window:MakeTab({
+    Name = "Teleport",
+    Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-
-local MiscTab = Window:MakeTab({
-    Name = "Misc",
-    Icon = "rbxassetid://6034509993",
+local GunTab = Window:MakeTab({
+    Name = "Gun Mods",
+    Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-
--- Example Toggle
-WeaponTab:AddToggle({
-    Name = "Infinite Ammo",
-    Default = false,
-    Callback = function(Value)
-        if Value then
-            local player = game.Players.LocalPlayer
-            local backpack = player.Backpack
-
-            for _, tool in pairs(backpack:GetChildren()) do
-                if tool:IsA("Tool") and tool:FindFirstChild("Ammo") then
-                    tool.Ammo.Value = math.huge
-                end
-                if tool:FindFirstChild("Mag") then
-                    tool.Mag.Value = math.huge
-                end
-            end
-        end
-    end
-})
-
-OrionLib:Init()
