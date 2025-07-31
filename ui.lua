@@ -1,6 +1,3 @@
--- YoxanHub | Premium UI (Rayfield Sidebar Style)
--- UI & Layout by ChatGPT - 2025
--- Fully Mobile Supported & Ready for Feature Expansion
 
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
