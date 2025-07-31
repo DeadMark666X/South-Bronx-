@@ -5,24 +5,6 @@ local MemoryStoreService = game:GetService("MemoryStoreService")
 local StarterGui = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 
-if game.PlaceVersion ~= expectedVersion then
-	local ui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
-	ui.Name = "FoundationOverlay"
-	ui.ResetOnSpawn = false
-	ui.IgnoreGuiInset = true
-	ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-
-	local text = Instance.new("TextLabel", ui)
-	text.Size = UDim2.new(1, 0, 1, 0)
-	text.BackgroundColor3 = Color3.new(0, 0, 0)
-	text.BackgroundTransparency = 0.2
-	text.Font = Enum.Font.GothamBold
-	text.TextSize = 36
-	text.TextColor3 = Color3.new(1, 1, 1)
-	text.TextStrokeTransparency = 0.6
-	text.Text = "Game Updated, Wait For Script To Be Unlocked"
-
-
 local bypassUI = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
 bypassUI.Name = "FoundationOverlay"
 bypassUI.IgnoreGuiInset = true
