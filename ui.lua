@@ -2,58 +2,27 @@
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
 local Window = Rayfield:CreateWindow({
-	Name = "YoxanHub | South Bronx",
-	LoadingTitle = "YoxanHub Loading...",
-	LoadingSubtitle = "by HistoriaX & GPT",
+	Name = "yoxanhub | South Bronx",
+	LoadingTitle = "yoxanhub Premium",
+	LoadingSubtitle = "Injecting features...",
 	ConfigurationSaving = {
-		Enabled = true,
-		FolderName = "YoxanHub",
-		FileName = "Config"
+		Enabled = false
 	},
 	Discord = {
-		Enabled = true,
-		Invite = "yoxanhub", 
-		RememberJoins = true
+		Enabled = false,
 	},
-	KeySystem = false,
+	KeySystem = false
 })
 
--- Tabs
-local CombatTab = Window:CreateTab("⚔️ Combat", 4483362458)
-local VisualTab = Window:CreateTab("🧿 Visual", 4483363011)
-local PlayerTab = Window:CreateTab("🏃 Player", 4483362458)
-local MiscTab = Window:CreateTab("🧪 Misc", 4483363022)
-local TeleportTab = Window:CreateTab("🌍 Teleport", 4483345998)
-local GunTab = Window:CreateTab("🔫 Gun Mods", 4483362993)
+-- 🎯 Main Tab
+local MainTab = Window:CreateTab("Main", 4483362458)
+local PlayerSection = MainTab:CreateSection("Player Mods")
 
--- Sections
-local CombatMain = CombatTab:CreateSection("Main Combat")
-local VisualMain = VisualTab:CreateSection("Visual Tweaks")
-local PlayerMain = PlayerTab:CreateSection("Player Mods")
-local MiscMain = MiscTab:CreateSection("Utilities")
-local TeleportMain = TeleportTab:CreateSection("Locations")
-local GunMain = GunTab:CreateSection("Modifications")
-
--- Example Toggle
-PlayerMain:CreateToggle({
-	Name = "Semi Godmode",
-	CurrentValue = false,
-	Flag = "godmode",
-	Callback = function(Value)
-		if Value then
-			loadstring(game:HttpGet("https://pastebin.com/raw/a81PCdNV"))()
-		end
-	end,
-})
-
--- Example Slider
-PlayerMain:CreateSlider({
+PlayerSection:CreateSlider({
 	Name = "WalkSpeed",
-	Range = {16, 100},
+	Range = {16, 50},
 	Increment = 1,
-	Suffix = "Speed",
 	CurrentValue = 16,
-	Flag = "WalkSpeed",
 	Callback = function(Value)
 		pcall(function()
 			game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
@@ -61,61 +30,66 @@ PlayerMain:CreateSlider({
 	end,
 })
 
--- Example Button
-VisualMain:CreateButton({
-	Name = "Fullbright",
-	Callback = function()
-		game:GetService("Lighting").Ambient = Color3.new(1, 1, 1)
-		game:GetService("Lighting").FogEnd = 1e10
+PlayerSection:CreateSlider({
+	Name = "FOV",
+	Range = {70, 120},
+	Increment = 1,
+	CurrentValue = 70,
+	Callback = function(Value)
+		workspace.CurrentCamera.FieldOfView = Value
 	end,
 })
 
--- Infinite Zoom
-VisualMain:CreateToggle({
-	Name = "Infinite Zoom",
+PlayerSection:CreateToggle({
+	Name = "Fly (Press V)",
 	CurrentValue = false,
-	Flag = "InfiniteZoom",
-	Callback = function(State)
-		if State then
-			game.Players.LocalPlayer.CameraMaxZoomDistance = 1000
+	Callback = function(Value)
+		if Value then
+			loadstring(game:HttpGet("https://pastebin.com/raw/TVYcXkS4"))()
 		end
-	end,
-})
-
--- Instant Interact
-MiscMain:CreateToggle({
-	Name = "Instant Interact (Prompt 0s)",
-	CurrentValue = false,
-	Flag = "InstantInteract",
-	Callback = function(State)
-		if State then
-			for _,v in pairs(workspace:GetDescendants()) do
-				if v:IsA("ProximityPrompt") then
-					v.HoldDuration = 0
-				end
-			end
-			workspace.DescendantAdded:Connect(function(v)
-				if v:IsA("ProximityPrompt") then
-					v.HoldDuration = 0
-				end
-			end)
-		end
-	end,
-})
-
--- Placeholder for Kill All
-CombatMain:CreateButton({
-	Name = "💀 Kill All (Soon)",
-	Callback = function()
-		Rayfield:Notify({
-			Title = "Coming Soon",
-			Content = "This feature will be added in the next release.",
-			Duration = 4
-		})
 	end
 })
 
--- Footer Credits
-MiscMain:CreateParagraph({Title = "Credits", Content = "YoxanHub v1.0\nby HistoriaX x ChatGPT\nUI: Rayfield\nTheme: OrionLib style\nMobile Ready ✓"})
+-- 🚀 Misc Tab
+local MiscTab = Window:CreateTab("Misc", 4483362458)
+local VisualsSection = MiscTab:CreateSection("Visual")
 
--- Ready for Expansion
+VisualsSection:CreateToggle({
+	Name = "Full Bright",
+	CurrentValue = false,
+	Callback = function(Value)
+		if Value then
+			loadstring(game:HttpGet("https://pastebin.com/raw/0FTrG9F1"))()
+		end
+	end
+})
+
+-- 🧩 Gun Mods Tab
+local GunTab = Window:CreateTab("Gun Mods", 4483362458)
+local GunSection = GunTab:CreateSection("Gun Tweaks")
+
+GunSection:CreateButton({
+	Name = "Infinite Ammo",
+	Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/a81PCdNV"))()
+	end
+})
+
+-- 📍 Teleport Tab
+local TeleportTab = Window:CreateTab("Teleport", 4483362458)
+local TeleportSection = TeleportTab:CreateSection("Kill / TP")
+
+TeleportSection:CreateTextbox({
+	Name = "TP To Player (L to stop)",
+	PlaceholderText = "Enter Name...",
+	RemoveTextAfterFocusLost = false,
+	Callback = function(input)
+		-- tp logic
+	end
+})
+
+Rayfield:Notify({
+	Title = "yoxanhub Injected",
+	Content = "UI & Core Ready. Enjoy!",
+	Duration = 5
+})
