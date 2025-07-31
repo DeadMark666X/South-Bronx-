@@ -22,11 +22,6 @@ if game.PlaceVersion ~= expectedVersion then
 	text.TextStrokeTransparency = 0.6
 	text.Text = "Game Updated, Wait For Script To Be Unlocked"
 
-	warn("[Bypass Hub] Game version mismatch: ", game.PlaceVersion)
-	task.wait(3)
-	ui:Destroy()
-	return
-end
 
 local bypassUI = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
 bypassUI.Name = "FoundationOverlay"
