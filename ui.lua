@@ -12,79 +12,93 @@ local Tab_Player = Window:MakeTab({
 	PremiumOnly = false
 })
 
--- Fly stable (PC + Mobile) toggle → langsung aktif
-local flying = false
-local flySpeed = 50
-local RS = game:GetService("RunService")
-local UIS = game:GetService("UserInputService")
-local LP = game.Players.LocalPlayer
-local Camera = workspace.CurrentCamera
+Tab_Player:AddToggle({ Name = "Fly (PC + Mobile)", Default = false, Callback = function(state) local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait() local hrp = char:WaitForChild("HumanoidRootPart")
 
--- Track key input (PC)
-local FlyKeys = {W=false, A=false, S=false, D=false, Space=false, LeftShift=false}
-for key in pairs(FlyKeys) do
-	UIS.InputBegan:Connect(function(i, gpe)
-		if not gpe and i.KeyCode.Name == key then FlyKeys[key] = true end
-	end)
-	UIS.InputEnded:Connect(function(i, gpe)
-		if not gpe and i.KeyCode.Name == key then FlyKeys[key] = false end
-	end)
+if state then
+        flying = true
+        task.spawn(function()
+            while flying and char and hrp and hrp.Parent do
+                local move = Vector3.zero
+                local camCF = Camera.CFrame
+
+                local hum = char:FindFirstChildWhichIsA("Humanoid")
+                if hum and hum.MoveDirection.Magnitude > 0 then
+                    move += hum.MoveDirection
+                end
+
+                if flyKeys.W then move += camCF.LookVector end
+                if flyKeys.S then move -= camCF.LookVector end
+                if flyKeys.A then move -= camCF.RightVector end
+                if flyKeys.D then move += camCF.RightVector end
+                if flyKeys.Space then move += camCF.UpVector end
+                if flyKeys.LeftShift then move -= camCF.UpVector end
+
+                if move.Magnitude > 0 then
+                    hrp.CFrame = hrp.CFrame + move.Unit * flySpeed * 0.1
+                end
+                task.wait()
+            end
+        end)
+    else
+        flying = false
+    end
 end
 
--- Toggle UI (langsung terbang saat on)
-Tab_Player:AddToggle({
-	Name = "Fly (PC + Mobile)",
-	Default = false,
-	Callback = function(Value)
-		local Char = LP.Character or LP.CharacterAdded:Wait()
-		local HRP = Char:WaitForChild("HumanoidRootPart")
-
-		if Value then
-			flying = true
-			task.spawn(function()
-				while flying and Char and HRP and HRP.Parent do
-					local Move = Vector3.zero
-					local Cam = Camera.CFrame
-
-					-- Mobile Movement
-					local Hum = Char:FindFirstChildWhichIsA("Humanoid")
-					if Hum and Hum.MoveDirection.Magnitude > 0 then
-						Move += Hum.MoveDirection
-					end
-
-					-- PC Movement
-					if FlyKeys.W then Move += Cam.LookVector end
-					if FlyKeys.S then Move -= Cam.LookVector end
-					if FlyKeys.A then Move -= Cam.RightVector end
-					if FlyKeys.D then Move += Cam.RightVector end
-					if FlyKeys.Space then Move += Cam.UpVector end
-					if FlyKeys.LeftShift then Move -= Cam.UpVector end
-
-					if Move.Magnitude > 0 then
-						HRP.CFrame = HRP.CFrame + Move.Unit * flySpeed * 0.1
-					end
-
-					task.wait()
-				end
-			end)
-		else
-			flying = false
-		end
-	end
 })
 
--- Slider FlySpeed
-Tab_Player:AddSlider({
-	Name = "Fly Speed",
-	Min = 10,
-	Max = 150,
-	Default = 50,
-	Increment = 5,
-	ValueName = "Speed",
-	Callback = function(v)
-		flySpeed = v
-	end
+Tab_Player:AddSlider({ Name = "Fly Speed", Min = 10, Max = 150, Default = 50, Increment = 5, ValueName = "Speed", Callback = function(val) flySpeed = val end })
+
+-- CTRL + Click to Delete local delConnection = nil Tab_Player:AddToggle({ Name = "CTRL + Click = Delete", Default = false, Callback = function(state) if delConnection then delConnection:Disconnect() delConnection = nil end if state then local mouse = LocalPlayer:GetMouse() delConnection = mouse.Button1Down:Connect(function() if UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) and mouse.Target then mouse.Target:Destroy() end end) end end })
+
+-- Target Inventory Viewer local targetName = "" local invScreen = nil
+
+Tab_Player:AddTextbox({ Name = "Target Name (View Inventory)", Default = "", TextDisappear = false, Callback = function(input) targetName = input end })
+
+Tab_Player:AddButton({ Name = "Show Target Inventory", Callback = function() if invScreen then invScreen:Destroy() end local targetPlayer = nil for _, p in ipairs(Players:GetPlayers()) do if string.find(p.Name:lower(), targetName:lower()) or (p.DisplayName and string.find(p.DisplayName:lower(), targetName:lower())) then targetPlayer = p break end end if not targetPlayer then return end
+
+invScreen = Instance.new("ScreenGui", playerGui)
+    invScreen.Name = "YoxanTargetInv"
+
+    local bg = Instance.new("Frame", invScreen)
+    bg.Size = UDim2.new(0, 250, 0, 300)
+    bg.Position = UDim2.new(1, -260, 0, 100)
+    bg.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    bg.BorderSizePixel = 1
+
+    local title = Instance.new("TextLabel", bg)
+    title.Size = UDim2.new(1, 0, 0, 30)
+    title.BackgroundTransparency = 1
+    title.Text = targetPlayer.DisplayName .. "'s Inventory"
+    title.TextColor3 = Color3.fromRGB(255,255,255)
+    title.Font = Enum.Font.SourceSansBold
+    title.TextSize = 16
+
+    local scroll = Instance.new("ScrollingFrame", bg)
+    scroll.Position = UDim2.new(0, 0, 0, 35)
+    scroll.Size = UDim2.new(1, 0, 1, -35)
+    scroll.CanvasSize = UDim2.new(0, 0, 5, 0)
+    scroll.ScrollBarThickness = 4
+    scroll.BackgroundTransparency = 1
+
+    local layout = Instance.new("UIListLayout", scroll)
+    layout.Padding = UDim.new(0, 2)
+
+    -- Dummy example (karena inventory asli butuh remote/fireevent):
+    for i = 1, 20 do
+        local item = Instance.new("TextLabel", scroll)
+        item.Size = UDim2.new(1, -6, 0, 20)
+        item.BackgroundTransparency = 1
+        item.Text = "Item #" .. i .. " (Contoh)"
+        item.TextColor3 = Color3.fromRGB(200,200,200)
+        item.Font = Enum.Font.SourceSans
+        item.TextSize = 14
+    end
+end
+
 })
+
+
+					
 -- WalkSpeed
 Tab_Player:AddSlider({
 	Name = "WalkSpeed",
@@ -111,12 +125,7 @@ Tab_Player:AddSlider({
 	end
 })
 
--
-			flying = false
-			RunService:UnbindFromRenderStep("YoxanFly")
-		end
-	end
-})
+			
 
 -- Reset Character
 Tab_Player:AddButton({
