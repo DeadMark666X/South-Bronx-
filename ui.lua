@@ -8,14 +8,16 @@ local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Camera = workspace.CurrentCamera
 
--- Key Verification
+-- Key Setup
 local KEY = "YoxanFree10"
+local isUnlocked = false
 
+-- Key UI
 local KeyWindow = OrionLib:MakeWindow({
     Name = "YoxanHub | Key System",
     HidePremium = false,
     SaveConfig = false,
-    ConfigFolder = "Yoxan_Key"
+    ConfigFolder = "YoxanKey"
 })
 
 local KeyTab = KeyWindow:MakeTab({
@@ -25,35 +27,33 @@ local KeyTab = KeyWindow:MakeTab({
 })
 
 KeyTab:AddTextbox({
-    Name = "Enter Your Key",
+    Name = "Input Your Key",
     Default = "",
     TextDisappear = true,
-    Callback = function(inputKey)
-        if inputKey == KEY then
+    Callback = function(input)
+        if input == KEY then
             OrionLib:MakeNotification({
-                Name = "✅ Access Granted",
-                Content = "Key is correct. Loading YoxanHub...",
-                Time = 3
+                Name = "✅ Success",
+                Content = "Key is correct. Welcome to YoxanHub!",
+                Time = 4
             })
 
-            task.wait(2)
-
-            for _, gui in ipairs(game:GetService("CoreGui"):GetChildren()) do
-                if gui.Name:match("Orion") then
-                    pcall(function() gui:Destroy() end)
+            -- Destroy key UI
+            for _, v in ipairs(game:GetService("CoreGui"):GetChildren()) do
+                if v.Name:find("Orion") then
+                    v:Destroy()
                 end
             end
 
+            -- Delay then Load Main UI
             task.wait(1)
-
-            -- Re-load OrionLib after UI cleared
             OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/1nig1htmare1234/SCRIPTS/main/Orion.lua"))()
 
             local Window = OrionLib:MakeWindow({
                 Name = "YoxanHub | South Bronx",
                 HidePremium = false,
                 SaveConfig = true,
-                ConfigFolder = "YoxanHub_Config"
+                ConfigFolder = "YoxanHubData"
             })
 
             local Tab_Player = Window:MakeTab({
@@ -62,7 +62,7 @@ KeyTab:AddTextbox({
                 PremiumOnly = false
             })
 
-            -- Fly System
+            -- Fly Variables
             local flying = false
             local flySpeed = 50
             local moveKeys = {W=false, A=false, S=false, D=false, Space=false, LeftShift=false}
@@ -77,7 +77,7 @@ KeyTab:AddTextbox({
             end
 
             Tab_Player:AddToggle({
-                Name = "Fly (Mobile + PC)",
+                Name = "Fly (PC + Mobile)",
                 Default = false,
                 Callback = function(state)
                     local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
@@ -135,10 +135,11 @@ KeyTab:AddTextbox({
                     end
                 end
             })
+
         else
             OrionLib:MakeNotification({
                 Name = "❌ Invalid Key",
-                Content = "The key you entered is incorrect!",
+                Content = "The key you entered is incorrect.",
                 Time = 4
             })
         end
