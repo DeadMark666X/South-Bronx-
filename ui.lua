@@ -1,132 +1,137 @@
--- YoxanHub - Key System + Fly (Mobile & PC)
+-- YoxanHub | Key System + Main UI (Fly Fixed) | Key: YoxanFree10
+
 local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/1nig1htmare1234/SCRIPTS/main/Orion.lua"))()
+local KEY = "YoxanFree10"
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
-local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
 local Camera = workspace.CurrentCamera
-local KEY = "YoxanFree10"
 
+-- Show Key UI first
 local KeyWindow = OrionLib:MakeWindow({
-	Name = "YoxanHub | Key System",
-	HidePremium = false,
-	SaveConfig = false,
-	ConfigFolder = "Yoxan_Key"
+    Name = "YoxanHub | Key Verification",
+    HidePremium = false,
+    SaveConfig = false,
+    ConfigFolder = "Yoxan_Key"
 })
 
 local KeyTab = KeyWindow:MakeTab({
-	Name = "Enter Key",
-	Icon = "rbxassetid://6031071050",
-	PremiumOnly = false
+    Name = "Enter Key",
+    Icon = "rbxassetid://6031071050",
+    PremiumOnly = false
 })
 
 KeyTab:AddTextbox({
-	Name = "Enter Your Key",
-	Default = "",
-	TextDisappear = true,
-	Callback = function(inputKey)
-		if inputKey == KEY then
-			OrionLib:MakeNotification({
-				Name = "✅ Access Granted",
-				Content = "Key is correct. Loading YoxanHub...",
-				Time = 3
-			})
-			task.wait(2)
-			for _, gui in ipairs(game:GetService("CoreGui"):GetChildren()) do
-				if gui.Name:match("Orion") then pcall(function() gui:Destroy() end) end
-			end
-			task.wait(1)
-			OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/1nig1htmare1234/SCRIPTS/main/Orion.lua"))()
+    Name = "Enter Key to Unlock UI",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(input)
+        if input == KEY then
+            OrionLib:MakeNotification({
+                Name = "✅ Key Correct",
+                Content = "Access Granted. Loading YoxanHub...",
+                Time = 3
+            })
 
-			local Window = OrionLib:MakeWindow({
-				Name = "YoxanHub | South Bronx",
-				HidePremium = false,
-				SaveConfig = true,
-				ConfigFolder = "YoxanHub_Config"
-			})
+            task.wait(1.5)
+            for _, gui in pairs(game:GetService("CoreGui"):GetChildren()) do
+                if gui.Name:find("Orion") then
+                    pcall(function() gui:Destroy() end)
+                end
+            end
 
-			local Tab_Player = Window:MakeTab({
-				Name = "Player",
-				Icon = "rbxassetid://4483345998",
-				PremiumOnly = false
-			})
+            task.wait(1)
 
-			local flying = false
-			local flySpeed = 50
-			local dir = {W=false,A=false,S=false,D=false,Space=false,LeftShift=false}
+            OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/1nig1htmare1234/SCRIPTS/main/Orion.lua"))()
 
-			UserInputService.InputBegan:Connect(function(i,gpe)
-				if gpe then return end
-				local k = i.KeyCode
-				if k == Enum.KeyCode.W then dir.W = true end
-				if k == Enum.KeyCode.A then dir.A = true end
-				if k == Enum.KeyCode.S then dir.S = true end
-				if k == Enum.KeyCode.D then dir.D = true end
-				if k == Enum.KeyCode.Space then dir.Space = true end
-				if k == Enum.KeyCode.LeftShift then dir.LeftShift = true end
-			end)
+            -- MAIN UI
+            local Window = OrionLib:MakeWindow({
+                Name = "YoxanHub | South Bronx",
+                HidePremium = false,
+                SaveConfig = true,
+                ConfigFolder = "YoxanHub_Config"
+            })
 
-			UserInputService.InputEnded:Connect(function(i,gpe)
-				if gpe then return end
-				local k = i.KeyCode
-				if k == Enum.KeyCode.W then dir.W = false end
-				if k == Enum.KeyCode.A then dir.A = false end
-				if k == Enum.KeyCode.S then dir.S = false end
-				if k == Enum.KeyCode.D then dir.D = false end
-				if k == Enum.KeyCode.Space then dir.Space = false end
-				if k == Enum.KeyCode.LeftShift then dir.LeftShift = false end
-			end)
+            local Tab = Window:MakeTab({
+                Name = "Player",
+                Icon = "rbxassetid://4483345998",
+                PremiumOnly = false
+            })
 
-			Tab_Player:AddToggle({
-				Name = "Fly (PC & Mobile)",
-				Default = false,
-				Callback = function(state)
-					local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-					local hrp = char:WaitForChild("HumanoidRootPart")
-					if state then
-						flying = true
-						task.spawn(function()
-							while flying and hrp and hrp.Parent do
-								local cam = Camera
-								local move = Vector3.zero
-								if dir.W then move += cam.CFrame.LookVector end
-								if dir.S then move -= cam.CFrame.LookVector end
-								if dir.A then move -= cam.CFrame.RightVector end
-								if dir.D then move += cam.CFrame.RightVector end
-								if dir.Space then move += cam.CFrame.UpVector end
-								if dir.LeftShift then move -= cam.CFrame.UpVector end
-								if move.Magnitude > 0 then
-									hrp.Velocity = move.Unit * flySpeed
-								else
-									hrp.Velocity = Vector3.zero
-								end
-								RunService.Heartbeat:Wait()
-							end
-						end)
-					else
-						flying = false
-						if hrp then hrp.Velocity = Vector3.zero end
-					end
-				end
-			})
+            -- Fly Variables
+            local flying = false
+            local speed = 50
+            local move = {W=false,A=false,S=false,D=false,Up=false,Down=false}
 
-			Tab_Player:AddSlider({
-				Name = "Fly Speed",
-				Min = 10,
-				Max = 150,
-				Default = 50,
-				Increment = 5,
-				ValueName = "Speed",
-				Callback = function(val)
-					flySpeed = val
-				end
-			})
-		else
-			OrionLib:MakeNotification({
-				Name = "❌ Invalid Key",
-				Content = "Key incorrect. Try again.",
-				Time = 4
-			})
-		end
-	end
+            -- Input for PC
+            UserInputService.InputBegan:Connect(function(i,gpe)
+                if gpe then return end
+                if i.KeyCode == Enum.KeyCode.W then move.W = true end
+                if i.KeyCode == Enum.KeyCode.A then move.A = true end
+                if i.KeyCode == Enum.KeyCode.S then move.S = true end
+                if i.KeyCode == Enum.KeyCode.D then move.D = true end
+                if i.KeyCode == Enum.KeyCode.Space then move.Up = true end
+                if i.KeyCode == Enum.KeyCode.LeftShift then move.Down = true end
+            end)
+            UserInputService.InputEnded:Connect(function(i,gpe)
+                if gpe then return end
+                if i.KeyCode == Enum.KeyCode.W then move.W = false end
+                if i.KeyCode == Enum.KeyCode.A then move.A = false end
+                if i.KeyCode == Enum.KeyCode.S then move.S = false end
+                if i.KeyCode == Enum.KeyCode.D then move.D = false end
+                if i.KeyCode == Enum.KeyCode.Space then move.Up = false end
+                if i.KeyCode == Enum.KeyCode.LeftShift then move.Down = false end
+            end)
+
+            -- Fly Toggle
+            Tab:AddToggle({
+                Name = "Fly (Mobile & PC)",
+                Default = false,
+                Callback = function(val)
+                    flying = val
+                    local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+                    local root = char:WaitForChild("HumanoidRootPart")
+                    task.spawn(function()
+                        while flying and root do
+                            local cf = Camera.CFrame
+                            local direction = Vector3.zero
+                            if move.W then direction += cf.LookVector end
+                            if move.S then direction -= cf.LookVector end
+                            if move.A then direction -= cf.RightVector end
+                            if move.D then direction += cf.RightVector end
+                            if move.Up then direction += Vector3.new(0,1,0) end
+                            if move.Down then direction -= Vector3.new(0,1,0) end
+
+                            if direction.Magnitude > 0 then
+                                root.Velocity = direction.Unit * speed
+                            else
+                                root.Velocity = Vector3.zero
+                            end
+                            RunService.Heartbeat:Wait()
+                        end
+                    end)
+                end
+            })
+
+            Tab:AddSlider({
+                Name = "Fly Speed",
+                Min = 10,
+                Max = 150,
+                Default = 50,
+                Increment = 5,
+                ValueName = "Speed",
+                Callback = function(val)
+                    speed = val
+                end
+            })
+
+        else
+            OrionLib:MakeNotification({
+                Name = "❌ Wrong Key",
+                Content = "Key Invalid. Try again.",
+                Time = 4
+            })
+        end
+    end
 })
