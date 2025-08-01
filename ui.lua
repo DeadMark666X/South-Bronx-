@@ -38,39 +38,84 @@ Tab_Player:AddSlider({
 	end
 })
 
--- Fly Toggle (ringan)
+-- Fly CFrame Stable (PC + Mobile Friendly) - Langsung dalam UI
 local flying = false
-local flyConnection
+local flySpeed = 50
+local UIS = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local LocalPlayer = game.Players.LocalPlayer
+
+local FlyKeys = {
+	W = false, A = false, S = false, D = false,
+	Space = false, LeftShift = false
+}
+
+-- Deteksi keyboard untuk PC
+for key, _ in pairs(FlyKeys) do
+	UIS.InputBegan:Connect(function(input, gpe)
+		if not gpe and input.KeyCode.Name == key then FlyKeys[key] = true end
+	end)
+	UIS.InputEnded:Connect(function(input, gpe)
+		if not gpe and input.KeyCode.Name == key then FlyKeys[key] = false end
+	end)
+end
+
+-- Toggle Fly (pakai UI)
 Tab_Player:AddToggle({
-	Name = "Fly (Mobile Friendly)",
+	Name = "Fly (PC + Mobile)",
 	Default = false,
-	Callback = function(val)
-		local plr = game.Players.LocalPlayer
-		local char = plr.Character or plr.CharacterAdded:Wait()
+	Callback = function(Value)
+		local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 		local hrp = char:WaitForChild("HumanoidRootPart")
+		if not hrp then return end
 
-		if val then
+		if Value then
 			flying = true
-			local bv = Instance.new("BodyVelocity", hrp)
-			bv.Name = "YoxanFly"
-			bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
-			bv.Velocity = Vector3.zero
+			RunService:BindToRenderStep("YoxanFly", Enum.RenderPriority.Character.Value, function()
+				if not flying or not hrp or not hrp.Parent then return end
 
-			flyConnection = game:GetService("RunService").Heartbeat:Connect(function()
-				local move = Vector3.zero
-				if UserInputService:IsKeyDown(Enum.KeyCode.W) then move = move + (workspace.CurrentCamera.CFrame.LookVector) end
-				if UserInputService:IsKeyDown(Enum.KeyCode.S) then move = move - (workspace.CurrentCamera.CFrame.LookVector) end
-				if UserInputService:IsKeyDown(Enum.KeyCode.A) then move = move - (workspace.CurrentCamera.CFrame.RightVector) end
-				if UserInputService:IsKeyDown(Enum.KeyCode.D) then move = move + (workspace.CurrentCamera.CFrame.RightVector) end
-				bv.Velocity = move * 100
+				local moveVec = Vector3.zero
+				local camCF = Camera.CFrame
+
+				-- Mobile Movement
+				local hum = char:FindFirstChildWhichIsA("Humanoid")
+				if hum and hum.MoveDirection.Magnitude > 0 then
+					moveVec += hum.MoveDirection
+				end
+
+				-- Keyboard Movement
+				if FlyKeys.W then moveVec += camCF.LookVector end
+				if FlyKeys.S then moveVec -= camCF.LookVector end
+				if FlyKeys.A then moveVec -= camCF.RightVector end
+				if FlyKeys.D then moveVec += camCF.RightVector end
+				if FlyKeys.Space then moveVec += camCF.UpVector end
+				if FlyKeys.LeftShift then moveVec -= camCF.UpVector end
+
+				if moveVec.Magnitude > 0 then
+					hrp.CFrame = hrp.CFrame + (moveVec.Unit * flySpeed * RunService.Heartbeat:Wait())
+				end
 			end)
 		else
 			flying = false
-			if flyConnection then flyConnection:Disconnect() end
-			if hrp:FindFirstChild("YoxanFly") then hrp:FindFirstChild("YoxanFly"):Destroy() end
+			RunService:UnbindFromRenderStep("YoxanFly")
 		end
 	end
 })
+
+-- Slider FlySpeed
+Tab_Player:AddSlider({
+	Name = "Fly Speed",
+	Min = 10,
+	Max = 150,
+	Default = 50,
+	Increment = 5,
+	ValueName = "Speed",
+	Callback = function(val)
+		flySpeed = val
+	end
+})
+-
 
 -- Reset Character
 Tab_Player:AddButton({
