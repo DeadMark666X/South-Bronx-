@@ -6,6 +6,95 @@ local Window = OrionLib:MakeWindow({
     ConfigFolder = "yoxanhub"
 })
 
+local Tab_Player = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- WalkSpeed
+Tab_Player:AddSlider({
+	Name = "WalkSpeed",
+	Min = 16,
+	Max = 100,
+	Default = 16,
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(val)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = val
+	end
+})
+
+-- JumpPower
+Tab_Player:AddSlider({
+	Name = "JumpPower",
+	Min = 50,
+	Max = 200,
+	Default = 50,
+	Increment = 5,
+	ValueName = "Power",
+	Callback = function(val)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = val
+	end
+})
+
+-- Fly Toggle (ringan)
+local flying = false
+local flyConnection
+Tab_Player:AddToggle({
+	Name = "Fly (Mobile Friendly)",
+	Default = false,
+	Callback = function(val)
+		local plr = game.Players.LocalPlayer
+		local char = plr.Character or plr.CharacterAdded:Wait()
+		local hrp = char:WaitForChild("HumanoidRootPart")
+
+		if val then
+			flying = true
+			local bv = Instance.new("BodyVelocity", hrp)
+			bv.Name = "YoxanFly"
+			bv.MaxForce = Vector3.new(1e5, 1e5, 1e5)
+			bv.Velocity = Vector3.zero
+
+			flyConnection = game:GetService("RunService").Heartbeat:Connect(function()
+				local move = Vector3.zero
+				if UserInputService:IsKeyDown(Enum.KeyCode.W) then move = move + (workspace.CurrentCamera.CFrame.LookVector) end
+				if UserInputService:IsKeyDown(Enum.KeyCode.S) then move = move - (workspace.CurrentCamera.CFrame.LookVector) end
+				if UserInputService:IsKeyDown(Enum.KeyCode.A) then move = move - (workspace.CurrentCamera.CFrame.RightVector) end
+				if UserInputService:IsKeyDown(Enum.KeyCode.D) then move = move + (workspace.CurrentCamera.CFrame.RightVector) end
+				bv.Velocity = move * 100
+			end)
+		else
+			flying = false
+			if flyConnection then flyConnection:Disconnect() end
+			if hrp:FindFirstChild("YoxanFly") then hrp:FindFirstChild("YoxanFly"):Destroy() end
+		end
+	end
+})
+
+-- Reset Character
+Tab_Player:AddButton({
+	Name = "Reset Character",
+	Callback = function()
+		game.Players.LocalPlayer.Character:BreakJoints()
+	end
+})
+
+-- Anti AFK
+Tab_Player:AddToggle({
+	Name = "Anti AFK",
+	Default = false,
+	Callback = function(enabled)
+		if enabled then
+			game:GetService("Players").LocalPlayer.Idled:Connect(function()
+				VirtualUser:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+				wait(1)
+				VirtualUser:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+			end)
+		end
+	end
+})
+
 -- // ESP Tab
 local Tab_ESP = Window:MakeTab({
 	Name = "ESP",
