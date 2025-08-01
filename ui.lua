@@ -1,6 +1,3 @@
--- YoxanHub | South Bronx Premium Script
--- OrionLib UI + ESP Functionality
-
 local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))()
 local Window = OrionLib:MakeWindow({
     Name = "YoxanHub | South Bronx",
