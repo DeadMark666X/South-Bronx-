@@ -115,7 +115,6 @@ Tab_Player:AddSlider({
 		flySpeed = val
 	end
 })
--
 
 -- Reset Character
 Tab_Player:AddButton({
