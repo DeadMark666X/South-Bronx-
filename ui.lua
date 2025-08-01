@@ -25,7 +25,7 @@ local KeyTab = KeyWindow:MakeTab({
 })
 
 KeyTab:AddTextbox({
-	Name = "Input Key (yoxanfree)",
+	Name = "Input Key", 
 	Default = "",
 	TextDisappear = true,
 	Callback = function(value)
